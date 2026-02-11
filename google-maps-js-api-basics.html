@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <script type="text/javascript">
+        //Paris
+        function initMap(){
+            
+            //location markers 
+            const markers =[
+                {
+                    locationName: 'Place du Trocadero',
+                    lat: 48.863002856367245, 
+                    lng: 2.2876578410885857,
+                    address: 'Pl. du Trocadéro <br> et du 11 Novembre, <br> 75016 <br> Paris, <br> France'
+                },
+
+                {
+                    locationName: 'Eiffel Tower',
+                    lat: 48.858652346359634,  
+                    lng: 2.2944169063103232,
+                    address: 'Av. Gustave Eiffel, <br> 75007 <br> Paris, <br> France'
+                }
+            ];
+            //create map
+            var mapOptions = {
+                center: new google.maps.LatLng(48.85841940859466, 2.294438363982015),
+                zoom: 15, 
+                mapTypeId: google.maps.MapTypeId.ROADMAP 
+            }; 
+
+            var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+            //circle
+            const circle = new google.maps.Circle({
+                center: { lat: 48.863002856367245, lng: 2.2876578410885857 },
+                radius: 100, 
+                fillColor: "#db4698",
+                strokeColor:"#ffffff",
+                map: map
+            })
+
+            //rectangle
+            const rectangle = new google.maps.Rectangle({
+                bounds: {
+                    north: 48.8592,
+                    south: 48.8571,
+                    east: 2.2950,
+                    west: 2.2938
+                }, 
+                fillColor: "#db4698",
+                strokeColor:"#ffffff",
+                map: map
+            })
+
+            //default marker 
+            const marker = new google.maps.Marker({
+                position: { lat: markers[0]['lat'], lng: markers[0]['lng'] },
+                map: map,
+                title: markers[0].locationName
+            });
+
+            const infoWindow1 = new google.maps.InfoWindow({
+                content: `
+                <div style="max-width:200px;">
+                    <h3>${markers[0].locationName}</h3>
+                    <p>${markers[0].address}</p>
+                    <img src="image/trocadero.jpg" alt="${markers[0].locationName}" width="100" height="100">
+                </div>
+                `
+            });
+
+            //info window open by default when map loads
+            infoWindow1.open(map, marker);
+
+            marker.addListener('click', function () {
+                infoWindow1.open(map, marker);
+            });
+
+            
+            //heart marker
+            const heartmarker = new google.maps.Marker({
+                position: { lat: markers[1]['lat'], lng: markers[1]['lng'] },
+                map: map,
+                icon: 'https://img.icons8.com/fluency/48/like.png',
+                title: 'Eiffel Tower'
+            });
+
+            //info window for heartmarker
+            const infoWindow2 = new google.maps.InfoWindow({
+                content: `
+                <div style="max-width:200px;">
+                    <h3>Eiffel Tower</h3>
+                    <p>Av. Gustave Eiffel, <br> 75007 <br> Paris, <br> France</p>
+                    <img src="image/eiffel-tower.jpg" alt="Eiffel Tower" width="100" height="100">
+                </div>
+                `
+            })
+
+            heartmarker.addListener('click', function () {
+                infoWindow2.open(map, heartmarker);
+            });
+        }
+        
+        //Tokyo
+        function gotoTokyo(){
+
+            var mapOptions = {
+                center: new google.maps.LatLng(35.65861613492449, 139.74542403298025),
+                zoom: 17,                 
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                disableDefaultUI: true
+            }; 
+            
+            var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl82dkCvQNaMLL0wb3QGgDGYyZQNcdqtE&callback=initMap" async defer></script>
+</head>
+
+<body onload="initMap()">
+    <h1>Google Maps</h1>
+    <div id="map_canvas"></div>
+
+    <div class="map-buttons">
+        <a href="javascript:initMap()" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            </svg>
+            Paris
+        </a>
+        <a href="javascript:gotoTokyo()" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+            </svg>
+            Tokyo
+        </a>      
+    </div>
+</body>
+
+</html>
