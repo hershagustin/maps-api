@@ -34,5 +34,13 @@ All features are original and designed to provide a clean, user-friendly interfa
   - **3+ overlays**, including markers, polygons, and circles.
   - Each overlay has an **event listener** that updates a `<div>` with information about the region:
 
+### Technologies Used
+- JavaScript (Google Maps API)
+- HTML5 / CSS3
+- Custom markers, infowindows, and map overlays
+- Event-driven DOM manipulation
+  
 ```javascript
 document.getElementById("locationdescription").in
+
+
