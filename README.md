@@ -39,8 +39,8 @@ All features are original and designed to provide a clean, user-friendly interfa
 - HTML5 / CSS3
 - Custom markers, infowindows, and map overlays
 - Event-driven DOM manipulation
-  
-```javascript
-document.getElementById("locationdescription").in
+
+
+# DEMO WEBISTE - https://hershagustin.com/portfolio/maps-api/google-map-overlay-click.html
 
 
